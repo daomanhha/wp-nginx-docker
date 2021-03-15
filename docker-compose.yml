@@ -31,11 +31,14 @@ services:
   wordpress:
     depends_on:
       - db
-    image: wordpress:5.7.0-php8.0-fpm
+    build: 
+      context: .
+      dockerfile: Dockerfile
     ports:
       - '8091:9000'
     restart: always
-    volumes: ['./wp:/var/www/html']
+    volumes:
+      - './wp:/var/www/html'
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: admin
